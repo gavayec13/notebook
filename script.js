@@ -1,4 +1,7 @@
-const $ = {}
+//const { title } = require("process");
+
+const $ = {};
+let notes = [];
 
 function createModal(options) {
     const modal = document.createElement('div');
@@ -12,8 +15,8 @@ function createModal(options) {
                     <span id='modalClose' class="modal-close">X</span>
                 </div>
                 <div class="modal-body">
-                    <input class='input-title' placeholder='Title'/>
-                    <textarea class='input-content' placeholder='note...'></textarea>
+                    <input id='inputTitle' class='input-title' placeholder='Title'/>
+                    <textarea id='inputContent' class='input-content' placeholder='note...'></textarea>
                     <div class="form">
                         <div class="form-radio-btn">
                             <input id="radio-1" type="radio" name="radio" value="1">
@@ -30,13 +33,13 @@ function createModal(options) {
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button>Save Note</button>
+                    <button id='saveBtn'>Save Note</button>
                     <button id='closeBtn'>Close</button>
                 </div>
             </div>
         </div>
     `)
-    document.body.appendChild(modal);
+    document.body.append(modal);
     return modal;
 }
 
@@ -44,6 +47,9 @@ function createModal(options) {
 $.modal = function(options) {
     const $modal = createModal(options);
     const animSpeed = 500;
+    const myNote = document.createElement('div');
+    
+    
 
     return {
         open() {
@@ -55,6 +61,31 @@ $.modal = function(options) {
             setTimeout(() => {
                 $modal.classList.remove('hide')
             }, animSpeed)
+        },
+        save() {
+            if(inputTitle.value && inputContent.value) {
+                notes.push({
+                    Title: inputTitle.value,
+                    Content: inputContent.value
+                })
+            }
+            localStorage.setItem('notes', JSON.stringify(notes))
+            let data = JSON.parse(localStorage.getItem('notes'))
+            data.map(note => {
+                console.log(note.Title, note.Content);
+                myNote.insertAdjacentHTML('beforeend', `
+                    <div class="my-notes">
+                        <p class="note-title">${note.Title}</p>
+                        <p class="note-content">${note.Content}</p>
+                    </div>
+                `)
+                container.append(myNote);
+                return myNote;
+            });
+                
+                
+                inputTitle.value = '';
+                inputContent.value = '';
         }
     }
 }
@@ -66,3 +97,8 @@ addBtn.onclick = () => newModal.open();
 closeBtn.onclick = () => newModal.close();
 
 modalClose.onclick = () => newModal.close();
+
+saveBtn.onclick = () => {
+    newModal.save();
+    newModal.close();
+};
