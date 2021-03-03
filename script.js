@@ -1,7 +1,17 @@
-//const { title } = require("process");
 
 const $ = {};
-let notes = [];
+
+let notes = JSON.parse(localStorage.getItem('notes')) || [];
+notes.map(note => {
+    const myNote = document.createElement('div');
+    myNote.insertAdjacentHTML('beforeend', `
+                <div class="my-notes">
+                    <p class="note-title">${note.Title}</p>
+                    <p class="note-content">${note.Content}</p>
+                </div>
+            `)
+            container.append(myNote);
+})
 
 function createModal(options) {
     const modal = document.createElement('div');
@@ -49,8 +59,6 @@ $.modal = function(options) {
     const animSpeed = 500;
     const myNote = document.createElement('div');
     
-    
-
     return {
         open() {
             $modal.classList.add('open')
@@ -70,22 +78,19 @@ $.modal = function(options) {
                 })
             }
             localStorage.setItem('notes', JSON.stringify(notes))
-            let data = JSON.parse(localStorage.getItem('notes'))
-            data.map(note => {
-                console.log(note.Title, note.Content);
-                myNote.insertAdjacentHTML('beforeend', `
-                    <div class="my-notes">
-                        <p class="note-title">${note.Title}</p>
-                        <p class="note-content">${note.Content}</p>
-                    </div>
-                `)
-                container.append(myNote);
-                return myNote;
-            });
-                
-                
-                inputTitle.value = '';
-                inputContent.value = '';
+            let note = notes[notes.length-1];
+        
+            console.log(note.Title, note.Content);
+            myNote.insertAdjacentHTML('beforeend', `
+                <div class="my-notes">
+                    <p class="note-title">${note.Title}</p>
+                    <p class="note-content">${note.Content}</p>
+                </div>
+            `)
+            container.append(myNote);
+            
+            inputTitle.value = '';
+            inputContent.value = '';
         }
     }
 }
