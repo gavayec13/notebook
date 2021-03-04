@@ -1,17 +1,24 @@
 
 const $ = {};
-
+const container = document.createElement('div');
+const deleteNoteBtn = document.querySelectorAll('.note-close');
 let notes = JSON.parse(localStorage.getItem('notes')) || [];
-notes.map(note => {
-    const myNote = document.createElement('div');
-    myNote.insertAdjacentHTML('beforeend', `
-                <div class="my-notes">
-                    <p class="note-title">${note.Title}</p>
-                    <p class="note-content">${note.Content}</p>
-                </div>
-            `)
-            container.append(myNote);
-})
+
+
+
+const renderNotes = (htmlElement, title, content) => {
+    htmlElement.classList.add('container');
+    htmlElement.insertAdjacentHTML('beforeend', `
+        <div class="my-notes">
+            <button id='del' class='note-close'>x</button>
+            <p class="note-title">${title}</p>
+            <p class="note-content">${content}</p>
+        </div>
+        `)
+    document.body.append(htmlElement);
+}
+
+notes.map(note => renderNotes(container, note.Title, note.Content));
 
 function createModal(options) {
     const modal = document.createElement('div');
@@ -57,7 +64,6 @@ function createModal(options) {
 $.modal = function(options) {
     const $modal = createModal(options);
     const animSpeed = 500;
-    const myNote = document.createElement('div');
     
     return {
         open() {
@@ -76,19 +82,11 @@ $.modal = function(options) {
                     Title: inputTitle.value,
                     Content: inputContent.value
                 })
-            }
-            localStorage.setItem('notes', JSON.stringify(notes))
-            let note = notes[notes.length-1];
-        
-            console.log(note.Title, note.Content);
-            myNote.insertAdjacentHTML('beforeend', `
-                <div class="my-notes">
-                    <p class="note-title">${note.Title}</p>
-                    <p class="note-content">${note.Content}</p>
-                </div>
-            `)
-            container.append(myNote);
+                localStorage.setItem('notes', JSON.stringify(notes))
+                let note = notes[notes.length-1];
             
+                renderNotes(container, note.Title, note.Content);
+            }
             inputTitle.value = '';
             inputContent.value = '';
         }
@@ -107,3 +105,7 @@ saveBtn.onclick = () => {
     newModal.save();
     newModal.close();
 };
+
+const del = document.getElementById('del');
+
+for(btn of deleteNoteBtn) btn.onclick = () => console.log('del');

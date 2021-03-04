@@ -9,7 +9,6 @@ html {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    opacity: 0.8;
 }
 
 header {
@@ -25,6 +24,7 @@ header {
 .header-title h1 {
     font-size: 3rem;
     color: #272724;
+    font-family: 'Krona One', sans-serif;
 }
 
 .addBtn {
@@ -36,7 +36,7 @@ header {
     margin: 20px auto;
     background: #272724;
     font-size: 1.5rem;
-    font-weight: bold;
+    font-family: 'Krona One', sans-serif;
     color: #fff;
     text-align: center;
     border-radius: 5px;
@@ -44,8 +44,9 @@ header {
     opacity: 0.9;
 }
 
-.modal {
-    
+.addBtn:hover {
+    transition: all .5s;
+    transform: scale(1.1);
 }
 
 .modal.open .modal-overlay,
@@ -110,12 +111,14 @@ header {
 
 .modal-title {
     font-size: 1.5rem;
+    font-family: 'Krona One', sans-serif;
 }
 
 .modal-close {
     cursor: pointer;
     font-size: 1.1rem;
     font-weight: bold;
+    font-family: 'Krona One', sans-serif;
 }
 
 .modal-body {
@@ -194,10 +197,12 @@ header {
     font-size: 1rem;
 }
 
-#container {
-    width: 550px;
+.container {
+    width: 600px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    margin: 30px auto;
 }
 
 .my-notes {
@@ -205,9 +210,37 @@ header {
     width: 200px;
     margin: 10px;
     padding: 10px;
-    background: #999;
+    background: #ffc;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+}
+
+.my-notes:hover {
+    transition: all 1s;
+    transform: scale(1.1);
 }
 
 .my-notes .note-title {
     font-size: 1.5rem;
+    font-family: 'Krona One', sans-serif;
 }
+
+.my-notes .note-content {
+    font-family: 'Indie Flower', cursive;
+}
+
+.note-close {
+    width: 10px;
+    display: flex;
+    margin-left: auto;
+    background: #ffc;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .note-close:focus {
+    border: none;
+    outline: none;
+  }
+  
