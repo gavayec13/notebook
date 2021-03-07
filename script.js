@@ -1,24 +1,23 @@
 
 const $ = {};
 const container = document.createElement('div');
-const deleteNoteBtn = document.querySelectorAll('.note-close');
+
 let notes = JSON.parse(localStorage.getItem('notes')) || [];
 
-
-
-const renderNotes = (htmlElement, title, content) => {
+const renderNotes = (htmlElement, title, content, index) => {
     htmlElement.classList.add('container');
     htmlElement.insertAdjacentHTML('beforeend', `
-        <div class="my-notes">
-            <button id='del' class='note-close'>x</button>
-            <p class="note-title">${title}</p>
-            <p class="note-content">${content}</p>
+        <div class="my-notes wrapper-${index}">
+                <button onclick='deleteNote(${index})' class='note-close'>x</button>
+                <p class="note-title">${title}</p>
+                <p class="note-content">${content}</p>
         </div>
         `)
     document.body.append(htmlElement);
 }
 
-notes.map(note => renderNotes(container, note.Title, note.Content));
+notes.map((note, index) => renderNotes(container, note.Title, note.Content, index));
+
 
 function createModal(options) {
     const modal = document.createElement('div');
@@ -76,24 +75,34 @@ $.modal = function(options) {
                 $modal.classList.remove('hide')
             }, animSpeed)
         },
-        save() {
-            if(inputTitle.value && inputContent.value) {
-                notes.push({
-                    Title: inputTitle.value,
-                    Content: inputContent.value
-                })
-                localStorage.setItem('notes', JSON.stringify(notes))
-                let note = notes[notes.length-1];
-            
-                renderNotes(container, note.Title, note.Content);
-            }
-            inputTitle.value = '';
-            inputContent.value = '';
-        }
+        
+      
     }
 }
 
-const newModal = $.modal()
+const newModal = $.modal();
+
+const saveNote = () => {
+    if(inputTitle.value && inputContent.value) {
+        notes.push({
+            Title: inputTitle.value,
+            Content: inputContent.value
+        })
+        localStorage.setItem('notes', JSON.stringify(notes));
+
+        let note = notes[notes.length-1];
+        renderNotes(container, note.Title, note.Content);
+    }
+    inputTitle.value = '';
+    inputContent.value = '';
+}
+
+const deleteNote = (index) => {
+    let el = document.querySelectorAll(`.wrapper-${index}`)
+    el[0].remove();
+    notes.splice(index, 1);
+    localStorage.setItem('notes', JSON.stringify(notes));
+}
 
 addBtn.onclick = () => newModal.open();
 
@@ -102,10 +111,6 @@ closeBtn.onclick = () => newModal.close();
 modalClose.onclick = () => newModal.close();
 
 saveBtn.onclick = () => {
-    newModal.save();
+    saveNote();
     newModal.close();
 };
-
-const del = document.getElementById('del');
-
-for(btn of deleteNoteBtn) btn.onclick = () => console.log('del');
