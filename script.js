@@ -1,22 +1,24 @@
 
 const $ = {};
 const container = document.createElement('div');
+let priority;
 
 let notes = JSON.parse(localStorage.getItem('notes')) || [];
 
-const renderNotes = (htmlElement, title, content, index) => {
+const renderNotes = (htmlElement, title, content, priority, index) => {
     htmlElement.classList.add('container');
     htmlElement.insertAdjacentHTML('beforeend', `
         <div class="my-notes wrapper-${index}">
-                <button onclick='deleteNote(${index})' class='note-close'>x</button>
-                <p class="note-title">${title}</p>
-                <p class="note-content">${content}</p>
+            <button onclick='deleteNote(${index})' class='note-close'>x</button>
+            <p class="note-title">${title}</p>
+            <p class="note-content">${content}</p>
+            <p class='${priority}'>${priority}</p>
         </div>
         `)
     document.body.append(htmlElement);
 }
 
-notes.map((note, index) => renderNotes(container, note.Title, note.Content, index));
+notes.map((note, index) => renderNotes(container, note.Title, note.Content, note.priority, index));
 
 
 function createModal(options) {
@@ -35,15 +37,15 @@ function createModal(options) {
                     <textarea id='inputContent' class='input-content' placeholder='note...'></textarea>
                     <div class="form">
                         <div class="form-radio-btn">
-                            <input id="radio-1" type="radio" name="radio" value="1">
+                            <input id="radio-1" type="radio" name="radio" value="red">
                             <label for="radio-1">High priority</label>
                         </div>
                         <div class="form-radio-btn">
-                            <input id="radio-2" type="radio" name="radio" value="2">
+                            <input id="radio-2" type="radio" name="radio" value="yellow">
                             <label for="radio-2">Middle priority</label>
                         </div>
                         <div class="form-radio-btn">
-                            <input id="radio-3" type="radio" name="radio" value="3">
+                            <input id="radio-3" type="radio" name="radio" value="green">
                             <label for="radio-3">Low priority</label>
                         </div>
                     </div>
@@ -86,15 +88,14 @@ const saveNote = () => {
     if(inputTitle.value && inputContent.value) {
         notes.push({
             Title: inputTitle.value,
-            Content: inputContent.value
+            Content: inputContent.value,
+            priority
         })
         localStorage.setItem('notes', JSON.stringify(notes));
 
         let note = notes[notes.length-1];
-        renderNotes(container, note.Title, note.Content);
+        renderNotes(container, note.Title, note.Content, note.priority);
     }
-    inputTitle.value = '';
-    inputContent.value = '';
 }
 
 const deleteNote = (index) => {
@@ -111,6 +112,25 @@ closeBtn.onclick = () => newModal.close();
 modalClose.onclick = () => newModal.close();
 
 saveBtn.onclick = () => {
+    radioCheck();
     saveNote();
     newModal.close();
+    clearInput();
 };
+
+function radioCheck() {
+    const rad = document.getElementsByName('radio');
+    for(let i=0; i<rad.length; i++) {
+        if(rad[i].checked) {
+            console.log(rad[i].value);
+            priority = rad[i].value;
+            return rad[i].value;
+        }
+    }
+}
+
+const clearInput = () => {
+    inputTitle.value = '';
+    inputContent.value = '';
+    priority = '';
+}

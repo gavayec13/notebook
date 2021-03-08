@@ -229,6 +229,18 @@ header {
     font-family: 'Indie Flower', cursive;
 }
 
+.my-notes .red {
+    color: rgb(131, 39, 39);
+}
+
+.my-notes .yellow {
+    color: #8a7208;
+}
+
+.my-notes .green {
+    color: rgb(28, 97, 28);
+}
+
 .note-close {
     width: 10px;
     display: flex;
