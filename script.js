@@ -1,24 +1,24 @@
 
 const $ = {};
 const container = document.createElement('div');
-let priority;
+let priority = 'green';
+let time = new Date().toString().slice(0, 21);
+const notes = JSON.parse(localStorage.getItem('notes')) || [];
 
-let notes = JSON.parse(localStorage.getItem('notes')) || [];
-
-const renderNotes = (htmlElement, title, content, priority, index) => {
+const renderNotes = (htmlElement, title, content, priority, time, index) => {
     htmlElement.classList.add('container');
     htmlElement.insertAdjacentHTML('beforeend', `
-        <div class="my-notes wrapper-${index}">
+        <div class="my-notes priority-${priority} wrapper-${index}">
             <button onclick='deleteNote(${index})' class='note-close'>x</button>
             <p class="note-title">${title}</p>
             <p class="note-content">${content}</p>
-            <p class='${priority}'>${priority}</p>
+            <div class="note-time">${time}</div>
         </div>
         `)
     document.body.append(htmlElement);
 }
 
-notes.map((note, index) => renderNotes(container, note.Title, note.Content, note.priority, index));
+notes.map((note, index) => renderNotes(container, note.title, note.content, note.priority, note.time, index));
 
 
 function createModal(options) {
@@ -76,9 +76,7 @@ $.modal = function(options) {
             setTimeout(() => {
                 $modal.classList.remove('hide')
             }, animSpeed)
-        },
-        
-      
+        }
     }
 }
 
@@ -87,14 +85,15 @@ const newModal = $.modal();
 const saveNote = () => {
     if(inputTitle.value && inputContent.value) {
         notes.push({
-            Title: inputTitle.value,
-            Content: inputContent.value,
-            priority
+            title: inputTitle.value,
+            content: inputContent.value,
+            priority,
+            time
         })
         localStorage.setItem('notes', JSON.stringify(notes));
 
         let note = notes[notes.length-1];
-        renderNotes(container, note.Title, note.Content, note.priority);
+        renderNotes(container, note.title, note.content, note.priority, time);
     }
 }
 
@@ -120,11 +119,9 @@ saveBtn.onclick = () => {
 
 function radioCheck() {
     const rad = document.getElementsByName('radio');
-    for(let i=0; i<rad.length; i++) {
-        if(rad[i].checked) {
-            console.log(rad[i].value);
-            priority = rad[i].value;
-            return rad[i].value;
+    for(el of rad) {
+        if(el.checked) {
+            priority = el.value;
         }
     }
 }

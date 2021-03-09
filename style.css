@@ -201,13 +201,14 @@ header {
     width: 600px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     margin: 30px auto;
 }
 
 .my-notes {
     display: flexbox;
     width: 200px;
+    height: 150px;
     margin: 10px;
     padding: 10px;
     background: #ffc;
@@ -221,31 +222,41 @@ header {
 }
 
 .my-notes .note-title {
+    margin: 5px auto;
+    padding: 0 20px;
     font-size: 1.5rem;
     font-family: 'Krona One', sans-serif;
 }
 
 .my-notes .note-content {
+    padding: 0 10px;
     font-family: 'Indie Flower', cursive;
 }
 
-.my-notes .red {
-    color: rgb(131, 39, 39);
+.my-notes .note-time {
+    display: flexbox;
+    margin-top: auto;
+    font-size: 0.7rem;
 }
 
-.my-notes .yellow {
-    color: #8a7208;
+.priority-red {
+    background: rgb(216, 95, 95);
 }
 
-.my-notes .green {
-    color: rgb(28, 97, 28);
+.priority-yellow {
+    background: rgb(233, 177, 94);
+}
+
+.priority-green {
+    background: rgb(119, 204, 119);
 }
 
 .note-close {
     width: 10px;
     display: flex;
     margin-left: auto;
-    background: #ffc;
+    background:none;
+    color: ivory;
     border: none;
     cursor: pointer;
     text-align: center;
