@@ -11,8 +11,8 @@ const renderNotes = (htmlElement, title, content, priority, time, index) => {
         <div class="my-notes priority-${priority} wrapper-${index}">
             <button onclick='deleteNote(${index})' class='note-close'>x</button>
             <p class="note-title">${title}</p>
-            <p class="note-content">${content}</p>
-            <div class="note-time">${time}</div>
+            <div class="note-content">${content}</div>
+            <div class="note-time"><span>${time}</span></div>
         </div>
         `)
     document.body.append(htmlElement);
