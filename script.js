@@ -2,17 +2,20 @@
 const $ = {};
 const container = document.createElement('div');
 let priority = 'green';
-let time = new Date().toString().slice(0, 21);
+let timeNow;
+const time = () => {
+    timeNow = new Date().toString().slice(0, 21);}
+    
 const notes = JSON.parse(localStorage.getItem('notes')) || [];
 
-const renderNotes = (htmlElement, title, content, priority, time, index) => {
+const renderNotes = (htmlElement, title, content, priority, timeNow, index) => {
     htmlElement.classList.add('container');
     htmlElement.insertAdjacentHTML('beforeend', `
         <div class="my-notes priority-${priority} wrapper-${index}">
             <button onclick='deleteNote(${index})' class='note-close'>x</button>
             <p class="note-title">${title}</p>
             <div class="note-content">${content}</div>
-            <div class="note-time"><span>${time}</span></div>
+            <div class="note-time"><span>${timeNow}</span></div>
         </div>
         `)
     document.body.append(htmlElement);
@@ -21,7 +24,7 @@ const renderNotes = (htmlElement, title, content, priority, time, index) => {
 notes.map((note, index) => renderNotes(container, note.title, note.content, note.priority, note.time, index));
 
 
-function createModal(options) {
+function createModal() {
     const modal = document.createElement('div');
     modal.classList.add('modal');
 
@@ -83,17 +86,18 @@ $.modal = function(options) {
 const newModal = $.modal();
 
 const saveNote = () => {
+    time();
     if(inputTitle.value && inputContent.value) {
         notes.push({
             title: inputTitle.value,
             content: inputContent.value,
             priority,
-            time
+            time: timeNow,
         })
         localStorage.setItem('notes', JSON.stringify(notes));
 
         let note = notes[notes.length-1];
-        renderNotes(container, note.title, note.content, note.priority, time);
+        renderNotes(container, note.title, note.content, note.priority, timeNow);
     }
 }
 
@@ -129,5 +133,4 @@ function radioCheck() {
 const clearInput = () => {
     inputTitle.value = '';
     inputContent.value = '';
-    priority = '';
 }
