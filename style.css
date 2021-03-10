@@ -14,6 +14,7 @@ html {
 header {
     display: flex;
     justify-content: space-around;
+    margin: 10px;
 }
 
 .header-title {
@@ -198,7 +199,7 @@ header {
 }
 
 .container {
-    width: 600px;
+    width: 90%;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;

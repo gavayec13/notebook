@@ -6,7 +6,7 @@ let timeNow;
 const time = () => {
     timeNow = new Date().toString().slice(0, 21);}
     
-const notes = JSON.parse(localStorage.getItem('notes')) || [];
+let notes = JSON.parse(localStorage.getItem('notes')) || [];
 
 const renderNotes = (htmlElement, title, content, priority, timeNow, index) => {
     htmlElement.classList.add('container');
@@ -14,7 +14,7 @@ const renderNotes = (htmlElement, title, content, priority, timeNow, index) => {
         <div class="my-notes priority-${priority} wrapper-${index}">
             <button onclick='deleteNote(${index})' class='note-close'>x</button>
             <p class="note-title">${title}</p>
-            <div class="note-content">${content}</div>
+            <div class="note-content">${content} ${index}</div>
             <div class="note-time"><span>${timeNow}</span></div>
         </div>
         `)
@@ -102,10 +102,16 @@ const saveNote = () => {
 }
 
 const deleteNote = (index) => {
-    let el = document.querySelectorAll(`.wrapper-${index}`)
-    el[0].remove();
+    let el = document.querySelector(`.wrapper-${index}`);
+    console.log(el);
+    console.log('index', index);
+    console.log(notes);
+    el.remove();
+    
     notes.splice(index, 1);
+    console.log(notes);
     localStorage.setItem('notes', JSON.stringify(notes));
+    
 }
 
 addBtn.onclick = () => newModal.open();
