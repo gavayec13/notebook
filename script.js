@@ -3,9 +3,10 @@ const $ = {};
 const container = document.createElement('div');
 let priority = 'green';
 let timeNow;
-const time = () => {
-    timeNow = new Date().toString().slice(0, 21);}
-    
+function time() {
+    timeNow = new Date().toString().slice(0, 21)
+};
+
 let notes = JSON.parse(localStorage.getItem('notes')) || [];
 
 const renderNotes = (htmlElement, title, content, priority, timeNow, index) => {
@@ -21,8 +22,8 @@ const renderNotes = (htmlElement, title, content, priority, timeNow, index) => {
     document.body.append(htmlElement);
 }
 
-notes.map((note, index) => renderNotes(container, note.title, note.content, note.priority, note.time, index));
-
+const notesMap = () => notes.map((note, index) => renderNotes(container, note.title, note.content, note.priority, note.time, index));
+notesMap();
 
 function createModal() {
     const modal = document.createElement('div');
@@ -97,22 +98,25 @@ const saveNote = () => {
         localStorage.setItem('notes', JSON.stringify(notes));
 
         let note = notes[notes.length-1];
-        renderNotes(container, note.title, note.content, note.priority, timeNow);
+        renderNotes(container, note.title, note.content, note.priority, timeNow, notes.length - 1);
     }
 }
 
-const deleteNote = (index) => {
+function deleteNote(index) {
     let el = document.querySelector(`.wrapper-${index}`);
-    console.log(el);
-    console.log('index', index);
+
     console.log(notes);
-    el.remove();
-    
+
+    el.parentElement.remove();
+
     notes.splice(index, 1);
+    
     console.log(notes);
+    notesMap();
     localStorage.setItem('notes', JSON.stringify(notes));
     
 }
+
 
 addBtn.onclick = () => newModal.open();
 
@@ -126,6 +130,7 @@ saveBtn.onclick = () => {
     newModal.close();
     clearInput();
 };
+
 
 function radioCheck() {
     const rad = document.getElementsByName('radio');
