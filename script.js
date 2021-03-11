@@ -1,6 +1,6 @@
 
 const $ = {};
-const container = document.createElement('div');
+//const container = document.createElement('div');
 let priority = 'green';
 let timeNow;
 function time() {
@@ -9,20 +9,25 @@ function time() {
 
 let notes = JSON.parse(localStorage.getItem('notes')) || [];
 
-const renderNotes = (htmlElement, title, content, priority, timeNow, index) => {
-    htmlElement.classList.add('container');
-    htmlElement.insertAdjacentHTML('beforeend', `
+const renderNotes = (container, title, content, priority, timeNow, index) => {
+    container.classList.add('container');
+    container.insertAdjacentHTML('beforeend', `
         <div class="my-notes priority-${priority} wrapper-${index}">
             <button onclick='deleteNote(${index})' class='note-close'>x</button>
             <p class="note-title">${title}</p>
-            <div class="note-content">${content} ${index}</div>
+            <div class="note-content">${content}</div>
             <div class="note-time"><span>${timeNow}</span></div>
         </div>
         `)
-    document.body.append(htmlElement);
+    document.body.append(container);
 }
 
-const notesMap = () => notes.map((note, index) => renderNotes(container, note.title, note.content, note.priority, note.time, index));
+const notesMap = () => {
+    const container = document.createElement('div');
+    notes.map((note, index) => {
+        renderNotes(container, note.title, note.content, note.priority, note.time, index)
+    });
+}
 notesMap();
 
 function createModal() {
@@ -98,23 +103,17 @@ const saveNote = () => {
         localStorage.setItem('notes', JSON.stringify(notes));
 
         let note = notes[notes.length-1];
+        let container = document.querySelector('.container') || document.createElement('div');
         renderNotes(container, note.title, note.content, note.priority, timeNow, notes.length - 1);
     }
 }
 
 function deleteNote(index) {
     let el = document.querySelector(`.wrapper-${index}`);
-
-    console.log(notes);
-
     el.parentElement.remove();
-
     notes.splice(index, 1);
-    
-    console.log(notes);
     notesMap();
     localStorage.setItem('notes', JSON.stringify(notes));
-    
 }
 
 
