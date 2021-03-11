@@ -1,8 +1,9 @@
 
 const $ = {};
-//const container = document.createElement('div');
+const container = document.querySelector('.container') || document.createElement('div');
 let priority = 'green';
 let timeNow;
+
 function time() {
     timeNow = new Date().toString().slice(0, 21)
 };
@@ -23,7 +24,7 @@ const renderNotes = (container, title, content, priority, timeNow, index) => {
 }
 
 const notesMap = () => {
-    const container = document.createElement('div');
+    
     notes.map((note, index) => {
         renderNotes(container, note.title, note.content, note.priority, note.time, index)
     });
@@ -103,14 +104,13 @@ const saveNote = () => {
         localStorage.setItem('notes', JSON.stringify(notes));
 
         let note = notes[notes.length-1];
-        let container = document.querySelector('.container') || document.createElement('div');
         renderNotes(container, note.title, note.content, note.priority, timeNow, notes.length - 1);
     }
 }
 
 function deleteNote(index) {
     let el = document.querySelector(`.wrapper-${index}`);
-    el.parentElement.remove();
+    el.parentElement.innerHTML = '';
     notes.splice(index, 1);
     notesMap();
     localStorage.setItem('notes', JSON.stringify(notes));
