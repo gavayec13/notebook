@@ -28,7 +28,7 @@ header {
     font-family: 'Krona One', sans-serif;
 }
 
-.addBtn {
+.addNote {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,7 +45,7 @@ header {
     opacity: 0.9;
 }
 
-.addBtn:hover {
+.addNote:hover {
     transition: all .5s;
     transform: scale(1.1);
 }
@@ -266,4 +266,3 @@ header {
     border: none;
     outline: none;
   }
-  
