@@ -1,40 +1,16 @@
 let notes = JSON.parse(localStorage.getItem('notes')) || [];
+const addNote = document.getElementById('addNote');
+// const modalClose = document.getElementById('modalClose');
+// const inputTitle = document.getElementById('inputTitle');
+// const inputContent = document.getElementById('inputContent');
+// const saveBtn = document.getElementById('saveBtn');
+// const closeBtn = document.getElementById('closeBtn');
 
 const time = () => {
     return new Date().toString().slice(0, 21);
 };
 
-const renderNotes = () => {
-    notes.map((note, index) => {
-        createNote(container, index, note);
-    });
-}
 renderNotes();
-
-const saveNote = () => {
-    let timeNow = time();
-    let priority = $.priority;
-    if(inputTitle.value && inputContent.value) {
-        notes.push({
-            title: inputTitle.value,
-            content: inputContent.value,
-            priority,
-            time: timeNow,
-        });
-        localStorage.setItem('notes', JSON.stringify(notes));
-
-        let note = notes[notes.length-1];
-        createNote(container, notes.length - 1, note);
-    }
-}
-
-const deleteNote = index => {
-    let el = document.querySelector(`.wrapper-${index}`);
-    el.parentElement.innerHTML = '';
-    notes.splice(index, 1);
-    renderNotes();
-    localStorage.setItem('notes', JSON.stringify(notes));
-}
 
 const newModal = $.modal();
 
@@ -54,3 +30,11 @@ const clearInput = () => {
     inputTitle.value = '';
     inputContent.value = '';
 }
+
+// const filterNotes = (notes) => {
+//     notes.filter(note => note.priority === 'red');
+//     console.log(note);
+// }
+
+// 1 drop   date, title.name, priority
+// 2 drop incrising decrising

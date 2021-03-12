@@ -2,13 +2,6 @@ const $ = {};
 
 window.$ = $;
 
-// const addNote = document.getElementById('addNote');
-// const modalClose = document.getElementById('modalClose');
-// const inputTitle = document.getElementById('inputTitle');
-// const inputContent = document.getElementById('inputContent');
-// const saveBtn = document.getElementById('saveBtn');
-// const closeBtn = document.getElementById('closeBtn');
-
 const createModal = () => {
     const modal = document.createElement('div');
     modal.classList.add('modal');
