@@ -12,20 +12,71 @@ html {
 }
 
 header {
+    height: 300px;
     display: flex;
     justify-content: space-around;
     margin: 10px;
+    font-family: 'Krona One', sans-serif;
 }
 
 .header-title {
-    margin: 20px auto;
+    margin: 10px auto;
     padding: 20px;
 }
 
 .header-title h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     color: #272724;
-    font-family: 'Krona One', sans-serif;
+}
+
+.drop-container {
+    margin: 20px;
+}
+
+.select-input {
+    height: 50px;
+    background: #272724;
+    padding: 10px;
+    border: 1px solid #999;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0.9;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.75);
+}
+
+.select-input:hover {
+    transition: all .5s;
+    transform: scale(1.1);
+}
+
+.select-dropdown {
+    border: 1px solid #999;
+    font-size: 1.5rem;
+    display: none;
+}
+
+.open-select {
+    display: block;
+    border-top: none;
+}
+
+.select-list {
+    background: #272724;
+    opacity: 0.9;
+}
+.select-item {
+    list-style: none;
+    padding: 0.5rem;
+    color: #fff;
+}
+
+.select-item:hover {
+    background-color: rgb(190, 188, 188);
+    cursor: pointer;
+    transition: .15s background ease-in;
 }
 
 .addNote {
@@ -33,7 +84,7 @@ header {
     align-items: center;
     justify-content: center;
     width: 200px;
-    height: 100px;
+    height: 70px;
     margin: 20px auto;
     background: #272724;
     font-size: 1.5rem;

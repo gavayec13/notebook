@@ -31,10 +31,12 @@ const clearInput = () => {
     inputContent.value = '';
 }
 
-// const filterNotes = (notes) => {
-//     notes.filter(note => note.priority === 'red');
-//     console.log(note);
-// }
+const selectToggle = () => {
+    const dropDown = document.querySelector('.select-dropdown');
+    dropDown.classList.contains('open-select') ? dropDown.classList.remove('open-select') : dropDown.classList.add('open-select');
+}
+
+selectInput.onclick = () => selectToggle();
 
 // 1 drop   date, title.name, priority
 // 2 drop incrising decrising
