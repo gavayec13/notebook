@@ -9,9 +9,12 @@ html {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    display: flex;
+    justify-content: center;
 }
 
 header {
+    width: 800px;
     height: 300px;
     display: flex;
     justify-content: space-around;
