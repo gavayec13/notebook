@@ -18,15 +18,15 @@ const createModal = () => {
                     <textarea id='inputContent' class='input-content' placeholder='note...'></textarea>
                     <div class="form">
                         <div class="form-radio-btn">
-                            <input id="radio-1" type="radio" name="radio" value="red" onclick='changePriority(event)'>
+                            <input id="radio-1" type="radio" name="radio" value="a-red" onclick='changePriority(event)'>
                             <label for="radio-1">High priority</label>
                         </div>
                         <div class="form-radio-btn">
-                            <input id="radio-2" type="radio" name="radio" value="yellow" onclick='changePriority(event)'>
+                            <input id="radio-2" type="radio" name="radio" value="b-yellow" onclick='changePriority(event)'>
                             <label for="radio-2">Middle priority</label>
                         </div>
                         <div class="form-radio-btn">
-                            <input id="radio-3" type="radio" name="radio" value="green" onclick='changePriority(event)'>
+                            <input id="radio-3" type="radio" name="radio" value="c-green" onclick='changePriority(event)'>
                             <label for="radio-3">Low priority</label>
                         </div>
                     </div>

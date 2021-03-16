@@ -36,11 +36,13 @@ const sortBy = (value) => {
     if(value === 'Name') {
         notes.sort((a, b) => a.title.localeCompare(b.title));
     } else if(value === 'Date') {
-        notes.sort(function(a,b){
+        notes.sort(function(a, b){
             let c = new Date(a.time);
             let d = new Date(b.time);
-            return c-d;
+            return d-c;
         });
+    } else if(value === 'Priority') {
+        notes.sort((a, b) => a.priority.localeCompare(b.priority));
     }
     renderNotes();
     localStorage.setItem('notes', JSON.stringify(notes));

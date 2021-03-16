@@ -21,7 +21,7 @@ const renderNotes = () => {
 
 const saveNote = () => {
     let timeNow = time();
-    let priority = $.priority || 'green';
+    let priority = $.priority || 'c-green';
     if(inputTitle.value && inputContent.value) {
         notes.push({
             title: inputTitle.value,

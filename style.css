@@ -290,15 +290,15 @@ header {
     font-size: 0.7rem;
 }
 
-.priority-red {
+.priority-a-red {
     background: rgb(216, 95, 95);
 }
 
-.priority-yellow {
+.priority-b-yellow {
     background: rgb(233, 177, 94);
 }
 
-.priority-green {
+.priority-c-green {
     background: rgb(119, 204, 119);
 }
 
