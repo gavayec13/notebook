@@ -11,8 +11,8 @@ const data = [
 const createInputSort = () => {
     dropContainer.classList.add('drop-container');
     dropContainer.insertAdjacentHTML('afterbegin', `
-        <div id="selectInput" class="select-input">
-            <span id='inputText'>Sort by</span>
+        <div id="selectInput" class="btn select-input">
+            <span id='inputText'>${$.selectedValue || 'Sort by'}</span>
             <i id="arrow" class="fas fa-chevron-down"></i>
         </div>
     `);
@@ -22,7 +22,7 @@ createInputSort();
 
 const items = data.map(item => {
     return `
-        <li onclick='onclickItems(event)' class="select-item" data-type='item' data-value='${item.value}'>${item.value}</li>
+        <li id='${item.value}' onclick='onclickItems(event)' class="select-item" data-type='item' data-value='${item.value}'>${item.value}</li>
     `
 });
 
@@ -46,9 +46,11 @@ const selectToggle = () => {
 selectInput.onclick = () => selectToggle();
 
 const onclickItems = (e) => {
+    selectToggle();
     const inputText = document.getElementById('inputText');
     inputText.innerHTML = e.target.dataset.value;
-    selectToggle();
+    $.selectedValue = e.target.dataset.value;
+    sortByName();
 }
 
 // 1 drop   date, title.name, priority

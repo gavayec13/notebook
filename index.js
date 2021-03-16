@@ -30,3 +30,11 @@ const clearInput = () => {
     inputTitle.value = '';
     inputContent.value = '';
 }
+
+const sortByName = () => {
+    document.querySelector('.container').innerHTML = '';
+    let newSelectedValue = $.selectedValue;
+    if(newSelectedValue === 'Name') notes.sort((a, b) => a.title.localeCompare(b.title));
+    renderNotes();
+    localStorage.setItem('notes', JSON.stringify(notes));
+}

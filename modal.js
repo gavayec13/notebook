@@ -32,8 +32,8 @@ const createModal = () => {
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id='saveBtn'>Save Note</button>
-                    <button id='closeBtn'>Close</button>
+                    <button id='saveBtn' class='btn'>Save Note</button>
+                    <button id='closeBtn' class='btn'>Close</button>
                 </div>
             </div>
         </div>
