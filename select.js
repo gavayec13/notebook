@@ -48,9 +48,9 @@ selectInput.onclick = () => selectToggle();
 const onclickItems = (e) => {
     selectToggle();
     const inputText = document.getElementById('inputText');
-    inputText.innerHTML = e.target.dataset.value;
-    $.selectedValue = e.target.dataset.value;
-    sortByName();
+    let newValue = e.target.dataset.value;
+    inputText.innerHTML = newValue;
+    sortBy(newValue);
 }
 
 // 1 drop   date, title.name, priority

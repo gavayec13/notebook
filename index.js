@@ -31,10 +31,17 @@ const clearInput = () => {
     inputContent.value = '';
 }
 
-const sortByName = () => {
+const sortBy = (value) => {
     document.querySelector('.container').innerHTML = '';
-    let newSelectedValue = $.selectedValue;
-    if(newSelectedValue === 'Name') notes.sort((a, b) => a.title.localeCompare(b.title));
+    if(value === 'Name') {
+        notes.sort((a, b) => a.title.localeCompare(b.title));
+    } else if(value === 'Date') {
+        notes.sort(function(a,b){
+            let c = new Date(a.time);
+            let d = new Date(b.time);
+            return c-d;
+        });
+    }
     renderNotes();
     localStorage.setItem('notes', JSON.stringify(notes));
 }
