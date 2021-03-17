@@ -223,6 +223,7 @@ header {
 
 #radio-1:checked + label {
 	background: rgb(216, 95, 95);
+    content: counter(check);
 }
 
 #radio-2:checked + label {

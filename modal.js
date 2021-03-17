@@ -19,7 +19,7 @@ const createModal = () => {
                     <div class="form">
                         <div class="form-radio-btn">
                             <input id="radio-1" type="radio" name="radio" value="a-red" onclick='changePriority(event)'>
-                            <label for="radio-1">High priority</label>
+                            <label for="radio-1">High priority<i class="fas fa-check"></i></label>
                         </div>
                         <div class="form-radio-btn">
                             <input id="radio-2" type="radio" name="radio" value="b-yellow" onclick='changePriority(event)'>
@@ -63,8 +63,10 @@ $.modal = function(options) {
 
 const changePriority = e => {
     $.priority = e.target.value;
+    
+    console.log(e.target);
 }
-
+//<i class="fas fa-check"></i>
 const clearPriority = () => {
     $.priority = '';
     let radio = document.getElementsByName('radio');
