@@ -19,7 +19,7 @@ const createModal = () => {
                     <div class="form">
                         <div class="form-radio-btn">
                             <input id="radio-1" type="radio" name="radio" value="a-red" onclick='changePriority(event)'>
-                            <label for="radio-1">High priority<i class="fas fa-check"></i></label>
+                            <label for="radio-1">High priority</label>
                         </div>
                         <div class="form-radio-btn">
                             <input id="radio-2" type="radio" name="radio" value="b-yellow" onclick='changePriority(event)'>
@@ -45,17 +45,16 @@ const createModal = () => {
 $.modal = function(options) {
     const $modal = createModal(options);
     const animSpeed = 500;
-    
     return {
         open() {
-            $modal.classList.add('open')
+            $modal.classList.add('open');
         },
         close() {
             clearPriority();
             $modal.classList.remove('open');
-            $modal.classList.add('hide')
+            $modal.classList.add('hide');
             setTimeout(() => {
-                $modal.classList.remove('hide')
+                $modal.classList.remove('hide');
             }, animSpeed)
         }
     }
@@ -63,10 +62,8 @@ $.modal = function(options) {
 
 const changePriority = e => {
     $.priority = e.target.value;
-    
-    console.log(e.target);
 }
-//<i class="fas fa-check"></i>
+
 const clearPriority = () => {
     $.priority = '';
     let radio = document.getElementsByName('radio');
@@ -74,3 +71,5 @@ const clearPriority = () => {
         el.checked = false;
     }
 }
+
+//<i class="fas fa-check"></i>

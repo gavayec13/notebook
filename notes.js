@@ -22,18 +22,15 @@ const renderNotes = () => {
 const saveNote = () => {
     let timeNow = time();
     let priority = $.priority || 'c-green';
-    if(inputTitle.value && inputContent.value) {
-        notes.push({
-            title: inputTitle.value,
-            content: inputContent.value,
-            priority,
-            time: timeNow,
-        });
-        localStorage.setItem('notes', JSON.stringify(notes));
-
-        let note = notes[notes.length-1];
-        createNote(container, notes.length - 1, note);
-    }
+    notes.push({
+        title: inputTitle.value,
+        content: inputContent.value,
+        priority,
+        time: timeNow,
+    });
+    localStorage.setItem('notes', JSON.stringify(notes));
+    let note = notes[notes.length-1];
+    createNote(container, notes.length - 1, note);
 }
 
 const deleteNote = index => {

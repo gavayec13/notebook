@@ -21,9 +21,13 @@ closeBtn.onclick = () => newModal.close();
 modalClose.onclick = () => newModal.close();
 
 saveBtn.onclick = () => {
-    saveNote();
-    newModal.close();
-    clearInput();
+    if(!inputTitle.value || !inputContent.value) {
+        alert('Please, input title and note!');
+    } else {
+        saveNote();
+        newModal.close();
+        clearInput();
+    }
 };
 
 const clearInput = () => {
