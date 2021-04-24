@@ -1,4 +1,4 @@
-const selectInput = document.getElementById('selectInput');
+const selectInputBtn = document.getElementById('selectInputBtn');
 const dropDown = document.getElementById('dropDown');
 const selectList = document.getElementById('selectList');
 const inputText = document.getElementById('inputText');
@@ -17,16 +17,16 @@ const items = data.map(item => {
 });
 selectList.innerHTML = items.join('');
 
-const openAndCloseSorting = () => {
+const openCloseSorting = () => {
     dropDown.classList.toggle('open-select');
     const arrow = document.getElementById('arrow');
     arrow.classList.toggle('fa-chevron-up');
 }
 
-selectInput.onclick = () => openAndCloseSorting();
+selectInputBtn.onclick = () => openCloseSorting();
 
 const showSelectedItemInSorting = event => {
-    openAndCloseSorting();
+    openCloseSorting();
     let newValue = event.target.dataset.value;
     inputText.innerHTML = newValue;
     sortBy(newValue);

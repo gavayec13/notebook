@@ -33,6 +33,15 @@ const saveNote = () => {
     createNote(container, notes.length - 1, note);
 }
 
+// const editNote = () => {
+//     container.addEventListener('click', e => {
+//         console.log(e.target);
+//         console.log(index);
+//         if(e.target.closest('.my-notes')) $.modal().open()
+//     })
+// }
+// editNote();
+
 const deleteNote = index => {
     let el = document.querySelector(`.wrapper-${index}`);
     el.parentElement.innerHTML = '';
