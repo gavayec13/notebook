@@ -17,7 +17,48 @@
         <div class="header-title">
             <h1>My Notebook</h1>
         </div>
-        
+        <div id="modal" class="modal">
+            <div class="modal-overlay">
+                <div class="modal-window">
+                    <div class="modal-header">
+                        <span class="modal-title">New Note</span>
+                        <span id='modalClose' class="modal-close">X</span>
+                    </div>
+                    <div class="modal-body">
+                        <input id='inputTitle' class='input-title' placeholder='Title'/>
+                        <textarea id='inputContent' class='input-content' placeholder='note...'></textarea>
+                        <div class="form">
+                            <div class="form-radio-btn">
+                                <input id="radio-1" type="radio" name="radio" value="a-red" onclick='changePriority(event)'>
+                                <label for="radio-1">High priority</label>
+                            </div>
+                            <div class="form-radio-btn">
+                                <input id="radio-2" type="radio" name="radio" value="b-yellow" onclick='changePriority(event)'>
+                                <label for="radio-2">Middle priority</label>
+                            </div>
+                            <div class="form-radio-btn">
+                                <input id="radio-3" type="radio" name="radio" value="c-green" onclick='changePriority(event)'>
+                                <label for="radio-3">Low priority</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id='saveBtn' class='btn'>Save Note</button>
+                        <button id='closeBtn' class='btn'>Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="dropContainer" class="drop-container">
+            <div id="selectInput" class="btn select-input">
+                <span id="inputText"></span>
+                <i id="arrow" class="fas fa-chevron-down"></i>
+            </div>
+            <div id="dropDown" class="select-dropdown">
+                <ul id="selectList" class="select-list">
+                </ul>
+            </div>
+        </div>
     </header>
     <script src="modal.js"></script>
     <script src="notes.js"></script>

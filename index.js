@@ -1,10 +1,10 @@
 let notes = JSON.parse(localStorage.getItem('notes')) || [];
 const addNote = document.getElementById('addNote');
-// const modalClose = document.getElementById('modalClose');
-// const inputTitle = document.getElementById('inputTitle');
-// const inputContent = document.getElementById('inputContent');
-// const saveBtn = document.getElementById('saveBtn');
-// const closeBtn = document.getElementById('closeBtn');
+const modalClose = document.getElementById('modalClose');
+const inputTitle = document.getElementById('inputTitle');
+const inputContent = document.getElementById('inputContent');
+const saveBtn = document.getElementById('saveBtn');
+const closeBtn = document.getElementById('closeBtn');
 
 const time = () => {
     return new Date().toString().slice(0, 21);
